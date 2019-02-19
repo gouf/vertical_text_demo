@@ -12,7 +12,7 @@ class VerticalText
     # NOTE: Array#zip は最長配列を渡すと、引数に渡された より短い配列に nil を挿入する
     dummy_line.zip(*target_lines)
               .yield_self(&method(:replace_nil_to_white_space))
-              .then(&method(:remove_place_holder))
+              .then(&method(:remove_dummy_line))
               .then(&method(:reverse_char_set))
               .then(&method(:character_array_to_string))
   end
@@ -52,7 +52,7 @@ class VerticalText
   end
 
   # 生成したプレースホルダは返却値として利用しないので取り除く
-  def remove_place_holder(character_array)
+  def remove_dummy_line(character_array)
     character_array.map { |inner| inner.reject { |x| x.eql?(:delete_me) } }
   end
 end
